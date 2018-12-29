@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.Connectivity;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ApCycle
@@ -17,7 +18,10 @@ namespace ApCycle
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                MainPage = new NavigationPage(new ExceptionView());
+            }
         }
 
         protected override void OnSleep()
@@ -38,7 +42,9 @@ namespace ApCycle
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
+            Application.Current.MainPage.DisplayAlert("Xamarin.Forms Message"
+                ,"OnResume();"
+                ,"Ok");
         }
     }
 }
