@@ -7,6 +7,7 @@ namespace ApCycle
 {
     public partial class App : Application
     {
+        string hour = "";
         public App()
         {
             InitializeComponent();
@@ -21,7 +22,18 @@ namespace ApCycle
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            if (Application.Current.Properties.ContainsKey("Las")==false)
+            {
+                DateTime time = DateTime.Now;
+                hour = Convert.ToString(time);
+                Application.Current.Properties["Las"] = hour;
+            }
+            else
+            {
+                DateTime time = DateTime.Now;
+                hour = Convert.ToString(time);
+                Application.Current.Properties["Las"] = hour;
+            }
         }
 
         protected override void OnResume()
